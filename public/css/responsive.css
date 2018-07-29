@@ -1,0 +1,406 @@
+/* Media Queries */
+
+/* Smart Phones -XS Devices */
+@media (max-width: 767px) { 
+    
+    .thumbnail .caption img{
+        margin-top: -115px;
+    }
+    #activities{
+        background: none;
+    }
+    #events .carousel-caption{
+        bottom: -50px;
+    }
+    #events .carousel-caption h1{
+        font-size: 16px;
+    }
+    #events .carousel-caption h2{
+        font-size: 14px;
+    }
+    #events .carousel-caption h3{
+        font-size: 12px;
+    }
+    #events .carousel-caption p .btn-primary{
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    #events .carousel-caption h1,
+    #events .carousel-caption h2,
+    #events .carousel-caption h3{
+        margin: 5px 0; 
+    }
+    footer nav.bottom-menu a {
+        font-size: 14px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+    #activities #sec3 .caption{
+        position: absolute;
+        background: rgba(0,0,0,0.2);
+        color: white;
+        opacity: 1;
+        top: 0;
+        transition: 1s all;
+    }
+
+
+    #contact .contact-header .caption{
+        right: 50px;
+    }
+    #contact .contact-header .caption h4,
+    #contact .contact-header .caption h4 a{
+        font-size: 16px;
+    }
+    #contact .contact-header .title{
+        right: 90px;
+        bottom: 0;
+    }
+    #contact .contact-header .title h1{
+        font-size: 37px;
+    }
+    #blog .vision p{
+        line-height: 1.5;
+    }
+    #blog .blogs .thumbnail .caption{
+        position: initial;
+    }
+    #blog .thumbnail .caption img {
+        margin-top: 0px;
+    }
+    #blog .blogs .thumbnail .caption .social .list-unstyled{
+        overflow: hidden;
+        margin-right: 0;
+        padding: 0;
+    }
+    #blog .blogs .thumbnail .caption .social ul li{
+        float: right;
+    }
+    #hotel .search .pull-right,
+    #hotel .search .pull-left{
+        float: none !important;
+    }
+    #hotel .pagination .pull-right{
+        margin-bottom: 15px;
+    }
+    ul.pgwSlider.listOnTheLeft, .pgwSlider.listOnTheLeft>ul,
+    .pgwSlider.listOnTheLeft .ps-current{
+        float: none;
+    }
+    ul.pgwSlider, .pgwSlider ul,
+    .pgwSlider .ps-current{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    ul.pgwSlider.wide>li, .pgwSlider.wide>ul>li{
+        width: 18% !important;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+    .pgwSlider.listOnTheLeft>ul{
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    #hotel.hotels2 #about-hotel .desc-icons a{
+        margin-left: 15px;
+    }
+    #hotel.hotels2 #about-hotel{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #hotel.hotels2 #about-hotel .desc-icons h5{
+        font-size: 14px;
+    }
+}
+
+/* Tablets -SM Devices */
+@media (min-width: 768px) and (max-width: 991px) { 
+    .navbar-right {
+        float: none!important;
+        text-align: -webkit-center;
+    }
+    .navbar-nav{
+        padding-right: 0!important;
+        float: none;
+        margin-top: 15px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+    .navbar-nav>li>a {
+        padding-top: 15px!important;
+        padding-bottom: 15px!important;
+    }
+    .navbar-default .navbar-nav>li>a{
+        font-size: 14px;
+    }
+    .carousel-caption{
+        top: 39%!important;
+    }
+    .carousel-caption form,
+    .carousel-caption form select.form-control, 
+    .carousel-caption form input[type=text] {
+        font-size: 16px!important;
+    }
+    .carousel-caption form button[type="submit"]{
+        font-size: 16px;
+    }
+    .carousel-caption form, 
+    .carousel-caption form select.form-control, 
+    .carousel-caption form input[type=text],
+    .carousel-caption form p .btn{
+        margin-left: 0;
+    }
+    #destination p{
+        line-height: 52px;
+    }
+    /*.carousel-caption .slider-icon{
+        max-width: 240px;
+    }
+    .carousel-caption .title p{
+        font-size: 24px;
+        margin-bottom: 0;
+        line-height: 24px;
+    }
+    .carousel-caption form{
+        margin-top: 24px;
+    }*/
+    #events .carousel-caption{
+        top: 15%!important;
+    }
+    #blog .blogs .thumbnail .caption{
+        height: 100%!important;
+    }
+    #blog .blogs .thumbnail .caption p{
+        line-height: 1.5!important;
+        margin-bottom: 20px!important;
+    }
+    .pgwSlider ul.ps-list{
+        max-height: 257px !important;
+        overflow-y: scroll;
+    }
+    ul.pgwSlider.wide>li, .pgwSlider.wide>ul>li{
+        margin-bottom: 8px;
+        margin-left: 5px;
+    }
+    #hotel.hotels2 #about-hotel .desc-icons a{
+        margin-left: 15px;
+    }
+    #hotel.hotels2 #about-hotel .desc-icons h5{
+        font-size: 14px;
+    }
+    #hotel.hotels3 h5.pull-right{
+        float: none !important;
+    }
+}
+
+/* Desktops -MD Devices */
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .navbar-nav {
+        padding-right: 50px!important;
+    }
+    .navbar-default .navbar-nav>li>a{
+        font-size: 14px;
+    }
+    .carousel-caption p{
+        font-size: 58px;
+        margin-bottom: 0;
+        margin-top: -5px;
+    }
+    .carousel-caption .slider-icon{
+        max-width: 360px;
+    }
+    .carousel-caption .title p{
+        font-size: 32px;
+    }
+    .carousel-caption form{
+        margin-top: 32px;
+    }
+    .carousel-control form p{
+        font-size: 48px;
+    }
+    .carousel-caption form p .btn{
+        margin-left: -19px;
+    }
+    .carousel-caption form,
+    .carousel-caption form select.form-control, 
+    .carousel-caption form input[type=text] {
+        font-size: 14px!important;
+    }
+    #destination{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #blog .vision p{
+        width: 67%;
+    }
+    #blog .blogs .thumbnail .caption{
+        height: 100%!important;
+    }
+    #blog .blogs .thumbnail .caption p{
+        line-height: 2!important;
+    }
+    #hotel.hotels2 #about-hotel .desc-icons a{
+        margin-left: 15px;
+    }
+}
+
+/* Laptops -LG Devices */
+@media (min-width: 1200px) { 
+    .carousel-caption p{
+        font-size: 58px;
+    }
+    .carousel-caption .title p{
+        line-height: 70px;
+        margin-bottom: 0;
+    }
+    .carousel-caption .slider-icon{
+        max-width: 416px;
+    }
+    #blog .vision p{
+        width: 67%;
+    }
+}
+
+/* All screens larger than XS */
+@media (min-width: 768px){
+    .navbar-nav{
+        padding-right: 106px;
+    }
+    .navbar-nav>li {
+        float: right;
+    }
+    .navbar-nav>li>a {
+        padding-top: 80px;
+        padding-bottom: 50px;
+    }
+    .navbar-nav>li>a::after {
+        content: '|';
+        margin-right: 25px;
+    }
+    .navbar-nav>li:last-child>a::after {
+        content: '';
+        margin-right: 0;
+    }
+    .carousel-control .glyphicon-chevron-right, 
+    .carousel-control .icon-next{
+        margin-right: -10px;
+    }
+    .carousel-control .glyphicon-chevron-left, 
+    .carousel-control .glyphicon-chevron-right, 
+    .carousel-control .icon-next, 
+    .carousel-control .icon-prev{
+        width: 30px;
+        height: 30px;
+        margin-top: -10px;
+        font-size: 30px;
+    }
+    .carousel-caption form{
+        font-size: 19px;
+        font-family: kufi;
+        color: #ffffff;
+    }
+    .carousel-caption{
+        top: 25%;
+    }
+    .thumbnail .caption h3{
+        margin-right: 15px;
+    }
+    .thumbnail .caption img{
+        margin-top: -70px;
+    }
+    #activities{
+        padding-bottom: 162px;
+    }
+    #activities .thumbnail .img-center img{
+        height: 405px!important;
+    }
+    #activities .col-xs-12 .thumbnail .img img{
+        height: 200px;
+    }
+    #activities #sec3 .thumbnail .caption h2{
+        font-size: 27px;
+        font-weight: bold;
+    }
+    #activities #sec3 .thumbnail .caption p{
+        font-size: 12px;
+    }
+    #about .about-header h1,
+    #blog .blog-header h1{
+        font-size: 86px;
+        font-weight: bold;
+    }
+    #about .about-header h3{
+        font-size: 34px;
+        font-weight: bold;
+    }
+    #about .vision p,
+    #about .message p{
+        font-size: 27px;
+    }
+    #contact .contact-form input,
+    #contact .contact-form textarea{
+        font-size: 30px;
+    }
+    #contact .contact-form form{
+        width: 70%;
+    }
+    #contact .contact-form .btn-danger{
+        font-size: 42px;
+        padding: 5px 60px;
+    }
+    #blog .blogs .thumbnail .img{
+        position: relative;
+    }
+    #blog .blogs .thumbnail .caption{
+        width: 43%;
+        margin-right: 14px;
+        top: 50%;
+        height: 85%;
+        display: inline-table;
+    }
+    #blog .blogs .thumbnail .caption img {
+        margin-top: 0;
+    }
+    #blog .blogs .thumbnail .caption p{
+        line-height: 3;
+        margin-bottom: 65px;
+    }
+    #blog .blogs .thumbnail .caption p.text-left{
+        margin-bottom: 15px;
+    }
+    #blog .blogs .thumbnail .caption .social{
+        position: absolute;
+        left: -39px;
+        bottom: -10px;
+    }
+    #blog .blogs .thumbnail{
+        margin-bottom: 30%;
+    }
+    .caption.caption-red{
+        /*height: 89%!important;*/
+        display: inline-table;
+    }
+    .caption.caption-red .social{
+        left: 100%!important;     
+    }
+    .pgwSlider.listOnTheLeft .ps-current{
+        width: 55%;
+    }
+    ul.pgwSlider, .pgwSlider ul{
+        width: 44%;
+    }
+    .pgwSlider ul.ps-list{
+        max-height: 305px;
+        overflow-y: scroll;
+    }
+    #hotel.hotels3 .desc{
+        padding-right: 35px;
+    }
+    #hotel.hotels4 h1.text-default{
+        margin-left: 150px;
+    }
+}
