@@ -142,11 +142,17 @@
                                     <div id="carousel-example-generic-1" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
-                                            @foreach($hotels[$i]->media as $media)
-                                                <div class="item">
-                                                    <img src="{{$media->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
-                                                </div>
-                                            @endforeach
+                                            @for($j=0 ; $j < count($hotels[$i]->media) ; $j++)
+                                                @if($j == 0)
+                                                    <div class="item active">
+                                                        <img src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                                    </div>
+                                                @else
+                                                    <div class="item">
+                                                        <img src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                                    </div>
+                                                @endif
+                                            @endfor
                                         </div>
                                         <!-- Controls -->
                                         <a class="left carousel-control" href="#carousel-example-generic-1" role="button" data-slide="prev">
