@@ -132,233 +132,49 @@
         <div class="search-result">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-1" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels1_sec2_1.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels1_sec2_2.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels1_sec2_3.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels1_sec2_4.jpg') }}" alt="Fondoq">
-                                    </div>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-1" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-1" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-2" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels2_1.jpg') }}" alt="Fondoq">
+                    @for($i = (($num-1)*10) ; $i < (($num-1)*10)+10 ; $i++)
+                        @if(count($hotels) == $i)
+                            @break
+                        @else
+                            <div class="col-md-4 col-sm-6 pull-right">
+                                <div class="thumbnail">
+                                    <div id="carousel-example-generic-1" class="carousel slide" data-ride="carousel">
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            @foreach($hotels[$i]->media as $media)
+                                                <div class="item">
+                                                    <img src="{{$media->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#carousel-example-generic-1" role="button" data-slide="prev">
+                                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic-1" role="button" data-slide="next">
+                                            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels2_2.jpg') }}" alt="Fondoq">
+                                    <div class="caption">
+                                        <div class="five-stars">
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                        </div>
+                                        <h5>{{$hotels[$i]->name}}</h5>
+                                        <p>{{$hotels[$i]->address}}</p>
+                                        <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">{{$hotels[$i]->max_price}}</span></p>
                                     </div>
                                 </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-2" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-2" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
                             </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endfor
 
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-3" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels2_3.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels2_4.jpg') }}" alt="Fondoq">
-                                    </div>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-3" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-3" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-4" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels2_5.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels2_6.jpg') }}" alt="Fondoq">
-                                    </div>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-4" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-4" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-5" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels2_7.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels2_8.jpg') }}" alt="Fondoq">
-                                    </div>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-5" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-5" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 pull-right">
-                        <div class="thumbnail">
-                            <div id="carousel-example-generic-6" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img src="{{ asset('images/hotels1_sec2_3.jpg') }}" alt="Fondoq">
-                                    </div>
-                                    <div class="item">
-                                        <img src="{{ asset('images/hotels1_sec2_4.jpg') }}" alt="Fondoq">
-                                    </div>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic-6" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic-6" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <div class="five-stars">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                    <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                </div>
-                                <h5>فندق فور سيزونز نايل بلازا</h5>
-                                <p>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </p>
-                                <p><a href="room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">562 جنيه</span></p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div><!-- End Result -->
@@ -368,16 +184,21 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
-                        <span class="page">الصفحة 1 من 2</span>
+                        <span class="page">الصفحة {{$num}} من {{ ceil(count($hotels)/10) }}</span>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
                         <nav class="page-navigation">
-                            <a href="#" class="active">1</a>
-                            <a href="#">2</a>
+                            @for($i = 1 ; $i <= ceil(count($hotels)/10) ; $i++)
+                                @if($i == $num)
+                                    <a href="/booking?p={{$num}}" class="active">{{$num}}</a>
+                                @else
+                                    <a href="/booking?p={{$i}}">{{$i}}</a>
+                                @endif
+                            @endfor
                         </nav>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
-                        <span class="page">40 من 70 فندق</span>
+                        <span class="page">10 من {{count($hotels)}} فندق</span>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\City;
+use App\models\Hotel;
 use App\models\Media;
 use App\models\RoomDetails;
 use Illuminate\Http\Request;
@@ -36,8 +37,12 @@ class HomeController extends Controller{
         return View::make('home.confirm');
     }
 
-    public function booking(){
-        return View::make('home.booking');
+    public function booking(Request $request){
+        $num = $request->input('p');
+
+        $hotels = Hotel::with('media')->get();
+
+        return View::make('home.booking', compact('hotels','num'));
     }
 
     public function blog(){

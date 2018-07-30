@@ -26,7 +26,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/home">الرئيسية <span class="sr-only">(current)</span></a></li>
                     <li><a href="/about">من نحن</a></li>
-                    <li><a href="/booking">حجز الفنادق</a></li>
+                    <li><a href="/booking?p=1">حجز الفنادق</a></li>
                     <li><a href="#">الأسئلة الشائعة</a></li>
                     <li><a href="/contact">اتصل بنا</a></li>
                 </ul>

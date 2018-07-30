@@ -34,11 +34,11 @@
                         <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
                             <div class="thumbnail">
                                 <div class="img">
-                                    @if(!empty($offer->hotel->media[0]) && $offer->hotel->media[0]->path=='EXTERNAL')
-                                        <img src="{{ asset('images/home_sec2_1.png') }}" alt="Fondoq">
-                                    @else
-                                        <img src="{{url('images', ['hotels', $offer->hotel->media[0]->filename])}}" onerror="imgError(this)" alt="Unloaded Image..."/>
-                                    @endif
+                                    {{--@if(!empty($offer->hotel->media[0]) && $offer->hotel->media[0]->path=='EXTERNAL')--}}
+                                        {{--<img src="{{ asset('images/home_sec2_1.png') }}" alt="Fondoq">--}}
+                                    {{--@else--}}
+                                    <img src="{{$offer->hotel->media[0]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                    {{--@endif--}}
                                 </div>
                                 <div class="caption">
                                     <h3 class="text-center">{{ $offer->name_ar }}</h3>
