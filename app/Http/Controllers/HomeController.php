@@ -25,8 +25,12 @@ class HomeController extends Controller{
         return View::make('home.payment');
     }
 
-    public function room(){
-        return View::make('home.room');
+    public function room(Request $request){
+        $id = $request->input('id');
+
+        $hot = Hotel::where('id',$id)->with('media')->get();
+
+        return View::make('home.room', compact('hot'));
     }
 
     public function contact(){

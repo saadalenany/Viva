@@ -166,15 +166,13 @@
                                     </div>
                                     <div class="caption">
                                         <div class="five-stars">
-                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            @for($j=0 ; $j < $hotels[$i]->stars ; $j++)
+                                                <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                            @endfor
                                         </div>
                                         <h5>{{$hotels[$i]->name}}</h5>
                                         <p>{{$hotels[$i]->address}}</p>
-                                        <p><a href="/room" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">{{$hotels[$i]->max_price}}</span></p>
+                                        <p><a href="/room?id={{$hotels[$i]->id}}" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">{{$hotels[$i]->max_price}}</span></p>
                                     </div>
                                 </div>
                             </div>
