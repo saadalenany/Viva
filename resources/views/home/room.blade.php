@@ -38,8 +38,8 @@
                         <hr>
                         <!-- pgwslider -->
                         <ul class="pgwSlider">
-                            @for($j=0 ; $j < count($hot[0]->media) ; $j++)
-                                <li><img src="{{$hot[0]->media[$j]->filename}}"></li>
+                            @for($j=0 ; $j < count($medias) ; $j++)
+                                <li><img src="{{$medias[$j]->filename}}"></li>
                             @endfor
                         </ul>
                     </div>
@@ -101,20 +101,14 @@
                         <div class="rooms">
                             <h5 class="text-primary"><img src="{{ asset('images/room.png') }}">اختار نوع غرفتك</h5>
                             <div class="row">
-                                {{--@foreach($hot[0]->rooms_details as $room)--}}
+                                @foreach($hot[0]->rooms_details as $room)
                                     <div class="col-sm-12">
                                         <input type="checkbox" id="room-check">
-                                        <label for="room-check"><span> OWI Room </span><small>إقامة بدون إفطار</small></label>
+                                        <label for="room-check"><span> {{$room->descr}} </span><small>إقامة بدون إفطار</small></label>
                                         <ul class="list">
-                                            <li><span>41 م²</span></li>
-                                            <li><span>حوض استحمام</span></li>
-                                            <li><span>حمام خاص</span></li>
-                                            <li><span>واي فاي مجانا</span></li>
-                                            <li><span>شرفة</span></li>
-                                            <li><span>إطلالة على النهر</span></li>
-                                            <li><span>تلفزيون بشاشة مسطحة</span></li>
-                                            <li><span>صندوق أمانات</span></li>
-                                            <li><span>تكييف  </span></li>
+                                            @foreach($room->room_amenities as $amn)
+                                                <li><span>{{$amn->name}}</span></li>
+                                            @endforeach
                                         </ul>
                                         <h6 class="text-danger">رسوم الإلغاء</h6>
                                         <ul class="list">
@@ -122,10 +116,9 @@
                                             <li><span>928 من تاريخ وما بعده 08/01/2017</span></li>
                                             <li><span>7٫424 من تاريخ وما بعده 10/01/2017</span></li>
                                         </ul>
-                                        <h1 class="text-danger">7,450 $</h1>
-                                        {{--<h1 class="text-danger">{{$room->price_per_night}}</h1>--}}
+                                        <h1 class="text-danger">{{$room->price_per_night}}</h1>
                                     </div>
-                                {{--@endforeach--}}
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -133,7 +126,7 @@
 
                 <!-- Submit Button -->
                 <div class="submit-btn text-left">
-                    <a href="/payment" class="btn btn-primary">متابعة</a>
+                    <a href="/payment?p={{$hot[0]->id}}" class="btn btn-primary">متابعة</a>
                 </div>
             </div>
         </div><!-- End Search -->

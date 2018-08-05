@@ -21,16 +21,22 @@ class HomeController extends Controller{
         return View::make('home.index', compact('offers', 'cities', 'images'));
     }
 
-    public function payment(){
-        return View::make('home.payment');
+    public function payment(Request $request){
+        $num = $request->input('p');
+
+        $hot = Hotel::where('id', $num)->with('media')->get();
+
+        return View::make('home.payment',compact("hot","num"));
     }
 
     public function room(Request $request){
         $id = $request->input('id');
 
-        $hot = Hotel::where('id',$id)->with('media')->get();
+        $medias = Media::with('hotels')->where('id',$id)->get();
 
-        return View::make('home.room', compact('hot'));
+        $hot = Hotel::where('id',$id)->with('rooms_details')->with('room_amenities')->with('amenities')->get();
+
+        return View::make('home.room', compact('hot','medias'));
     }
 
     public function contact(){

@@ -10,18 +10,20 @@
     <link rel="shortcut icon" href="{{ asset('images/icon.ico') }}" type="image/x-icon">
 
     <!-- Bootstrap -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- JQuery styles -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Pgwslider style -->
+    <link href="{{asset('css/pgwslider.min.css')}}" rel="stylesheet">
     <!-- Custom style -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
 
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -88,8 +90,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- JQuery UI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- PGWslider -->
+<script src="{{asset('js/pgwslider.min.js')}}"></script>
 <!-- Custom Script -->
-<script src="{{ asset('js/script.js')}}"></script>
+<script src="{{asset('js/script.js')}}"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script>
     $( function() {
         $( ".datepicker" ).datepicker();

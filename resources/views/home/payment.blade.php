@@ -28,18 +28,16 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-6 pull-right">
                                 <div class="desc">
-                                    <h5 class="pull-right">فندق فور سيزونز نايل بلازا</h5>
+                                    <h5>{{$hot[0]->name}}</h5>
                                     <div class="five-stars">
-                                        <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                        <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                        <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                        <img src="{{ asset('images/star.png') }}" alt="Fondoq">
-                                        <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                        @for($j=0 ; $j < $hot[0]->stars ; $j++)
+                                            <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                        @endfor
                                     </div>
                                     <div class="clearfix"></div>
-                                    <h5>كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </h5>
-                                    <p><img src="{{ asset('images/check_out.png') }}"><span>تاريخ الوصول</span> - <span>24-12-2016</span></p>
-                                    <p><img src="{{ asset('images/check_in.png') }}"><span>تاريخ المغادرة</span> - <span>24-12-2016</span></p>
+                                    <h5>{{$hot[0]->address}}</h5>
+                                    <p><img src="{{ asset('images/check_out.png') }}"><span>تاريخ الوصول</span> - <span>{{$hot[0]->created_at}}</span></p>
+                                    <p><img src="{{ asset('images/check_in.png') }}"><span>تاريخ المغادرة</span> - <span>{{$hot[0]->updated_at}}</span></p>
                                     <p><img src="{{ asset('images/profile-icon.png') }}"><span>غرفة كلاسيك مزدوجة أو توأمية</span></p>
                                     <h1 class="text-danger">7٫424 جنيه</h1>
                                 </div>

@@ -18,4 +18,8 @@ class RoomDetails extends Model
     public function media(){
         return $this->hasMany('App\models\Media', 'rooms_details_id');
     }
+
+    public function room_amenities(){
+        return $this->hasMany('App\models\RoomAmenities','rooms_details_id');
+    }
 }

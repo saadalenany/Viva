@@ -23,7 +23,11 @@ class Hotel extends Model
     }
 
     public function rooms_details(){
-        $this->belongsTo('App\models\RoomDetails', 'hotels_id');
+        return $this->hasMany('App\models\RoomDetails', 'hotels_id');
+    }
+
+    public function hotel_amenities(){
+        return $this->hasMany('App\models\HotelAmenities', 'hotels_id');
     }
 
 }
