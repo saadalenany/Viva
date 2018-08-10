@@ -51,7 +51,7 @@
                                     <h1 class="text-center">{{ $offer->offer_price }}</h1>
                                 </div>
                                 <p class="text-center">
-                                    <a {{--href="{{ action('SearchController@getIndex') }}"--}} class="btn btn-primary" role="button">احجز الان</a>
+                                    <a href="/room?id={{$offer->hotels_id}}" class="btn btn-primary" role="button">احجز الان</a>
                                 </p>
                             </div>
                         </div>

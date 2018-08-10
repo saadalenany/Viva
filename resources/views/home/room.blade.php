@@ -38,8 +38,8 @@
                         <hr>
                         <!-- pgwslider -->
                         <ul class="pgwSlider">
-                            @for($j=0 ; $j < count($medias) ; $j++)
-                                <li><img src="{{$medias[$j]->filename}}"></li>
+                            @for($j=0 ; $j < count($hot[0]->media) ; $j++)
+                                <li><img src="{{$hot[0]->media[$j]->filename}}"></li>
                             @endfor
                         </ul>
                     </div>
@@ -62,37 +62,31 @@
                         </nav>
                         <div class="desc">
                             <div class="row">
+                                @php
+                                    $x = 0;
+                                @endphp
                                 <div class="col-md-4 col-sm-6 pull-right">
                                     <ul class="list">
-                                        <li><span>صالة مشتركة / منطقة تلفزيون</span></li>
-                                        <li><span>خدمة نقل من وإلى المطار - تكلفة إضافية</span></li>
-                                        <li><span>مكيفات</span></li>
-                                        <li><span>غرفة خالية من مسببات الحساسية</span></li>
-                                        <li><span>محلات تجارية في الموقع</span></li>
-                                        <li><span>خدمة إيقاظ</span></li>
-                                        <li><span>تدفئة</span></li>
+                                        @for($i=$x ; $i < count($hotel_amenities)/3 ; $i++ , $x++)
+                                            <li><span>{{$hotel_amenities[$i]->name}}</span></li>
+                                        @endfor
+                                    </ul>
+                                </div>
+                                <div class="col-md-4 col-sm-6 pull-right">
+                                    @php
+                                        $newSize = $x+count($hotel_amenities)/3;
+                                    @endphp
+                                    <ul class="list">
+                                        @for($i=$x ; $i < $newSize ; $i++ , $x++)
+                                            <li><span>{{$hotel_amenities[$i]->name}}</span></li>
+                                        @endfor
                                     </ul>
                                 </div>
                                 <div class="col-md-4 col-sm-6 pull-right">
                                     <ul class="list">
-                                        <li><span>استئجار سيارات</span></li>
-                                        <li><span>تتوفر غرف متصلة</span></li>
-                                        <li><span>أرض مغطاة بالسجاد</span></li>
-                                        <li><span>محلات هدايا</span></li>
-                                        <li><span>صندوق الأمانات</span></li>
-                                        <li><span>مصعد</span></li>
-                                        <li><span>مرافق غرف كبار الشخصيات</span></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4 col-sm-6 pull-right">
-                                    <ul class="list">
-                                        <li><span>غرف عائلية</span></li>
-                                        <li><span>صالون حلاقة / تجميل</span></li>
-                                        <li><span>مرافق لذوي الاحتياجات الخاصة</span></li>
-                                        <li><span>مرافق كي الملابس</span></li>
-                                        <li><span>خدمة نقل المطار</span></li>
-                                        <li><span>غرف لغير المدخنين</span></li>
-                                        <li><span>مكواة</span></li>
+                                        @for($i=$x ; $i < count($hotel_amenities) ; $i++)
+                                            <li><span>{{$hotel_amenities[$i]->name}}</span></li>
+                                        @endfor
                                     </ul>
                                 </div>
                             </div>
@@ -101,10 +95,10 @@
                         <div class="rooms">
                             <h5 class="text-primary"><img src="{{ asset('images/room.png') }}">اختار نوع غرفتك</h5>
                             <div class="row">
-                                @foreach($hot[0]->rooms_details as $room)
+                                @foreach($room_amenities as $room)
                                     <div class="col-sm-12">
                                         <input type="checkbox" id="room-check">
-                                        <label for="room-check"><span> {{$room->descr}} </span><small>إقامة بدون إفطار</small></label>
+                                        <label for="room-check"><span>  </span><small>{{$room->name}}</small></label>
                                         <ul class="list">
                                             @foreach($room->room_amenities as $amn)
                                                 <li><span>{{$amn->name}}</span></li>

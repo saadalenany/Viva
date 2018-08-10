@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\City;
 use App\models\Hotel;
+use App\models\HotelAmenities;
 use App\models\Media;
 use App\models\RoomDetails;
 use Illuminate\Http\Request;
@@ -32,11 +33,13 @@ class HomeController extends Controller{
     public function room(Request $request){
         $id = $request->input('id');
 
-        $medias = Media::with('hotels')->where('id',$id)->get();
+        $hot = Hotel::where('id' ,$id)->with('media')->get();
 
-        $hot = Hotel::where('id',$id)->with('rooms_details')->with('room_amenities')->with('amenities')->get();
+        $hotel_amenities = HotelAmenities::where('hotels_id' ,$id)->get();
 
-        return View::make('home.room', compact('hot','medias'));
+        $room_amenities = RoomDetails::where('hotels_id' ,$id)->with('room_amenities')->get();
+
+        return View::make('home.room', compact('hot','hotel_amenities', 'room_amenities'));
     }
 
     public function contact(){
