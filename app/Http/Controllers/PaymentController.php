@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\SharedFunctions;
 use App\models\ManualInvoice;
 use App\models\ManualTransaction;
 use Illuminate\Http\Request;

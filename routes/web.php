@@ -30,4 +30,3 @@ Route::get('/booking', 'HomeController@booking');
 Route::get('/blog', 'HomeController@blog');
 
 Route::get('/about', 'HomeController@about');
-

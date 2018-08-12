@@ -104,12 +104,12 @@
                                                 <li><span>{{$amn->name}}</span></li>
                                             @endforeach
                                         </ul>
-                                        <h6 class="text-danger">رسوم الإلغاء</h6>
-                                        <ul class="list">
-                                            <li><span>إلغاء مجاني قبل تاريخ 08/01/2017</span></li>
-                                            <li><span>928 من تاريخ وما بعده 08/01/2017</span></li>
-                                            <li><span>7٫424 من تاريخ وما بعده 10/01/2017</span></li>
-                                        </ul>
+                                        {{--<h6 class="text-danger">رسوم الإلغاء</h6>--}}
+                                        {{--<ul class="list">--}}
+                                            {{--<li><span>إلغاء مجاني قبل تاريخ 08/01/2017</span></li>--}}
+                                            {{--<li><span>928 من تاريخ وما بعده 08/01/2017</span></li>--}}
+                                            {{--<li><span>7٫424 من تاريخ وما بعده 10/01/2017</span></li>--}}
+                                        {{--</ul>--}}
                                         <h1 class="text-danger">{{$room->price_per_night}}</h1>
                                     </div>
                                 @endforeach

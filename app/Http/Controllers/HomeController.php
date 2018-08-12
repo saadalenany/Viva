@@ -53,9 +53,12 @@ class HomeController extends Controller{
     public function booking(Request $request){
         $num = $request->input('p');
 
-        $hotels = Hotel::with('media')->get();
+        $hotel_amenities = HotelAmenities::with('amenities')->get();
+        $max = count(Hotel::get());
 
-        return View::make('home.booking', compact('hotels','num'));
+        $hotels = Hotel::with('media')->skip(($num-1)*10)->take(10)->get();
+
+        return View::make('home.booking', compact('hotels','num', 'max', 'hotel_amenities'));
     }
 
     public function blog(){
@@ -66,4 +69,27 @@ class HomeController extends Controller{
         return View::make('home.about');
     }
 
+    public function filterHotels(){
+        $amenity = $_REQUEST["amenity"];
+        $start_price = $_REQUEST["start_price"];
+        $end_price = $_REQUEST["end_price"];
+        $stars = $_REQUEST["stars"];
+
+        $hotels = Hotel::with('media')->get();
+
+        if ($stars != "All"){
+            $hotels = Hotel::where('stars',$stars)->with('media')->get();
+        }
+        if ($amenity != "All"){
+            $hotels = Hotel::with('hotel_amenities')->where('name',$amenity)->get();
+        }
+        if ($start_price != ""){
+            $hotels = Hotel::where('min_price',$start_price)->with('media')->get();
+        }
+        if ($end_price != ""){
+            $hotels = Hotel::where('max_price',$end_price)->with('media')->get();
+        }
+
+        return json_encode($hotels);
+    }
 }

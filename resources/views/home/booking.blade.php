@@ -40,23 +40,16 @@
                         <div class="result">
                             <div class="text-center">
                                 <div class="col-md-3 col-sm-6 pull-right">
-                                    <label>تاريخ الوصول</label><br>
-                                    <span>24-12-2016</span>
+                                    <label>وسائل الراحة</label><br>
                                 </div>
                                 <div class="col-md-3 col-sm-6 pull-right">
-                                    <label>تاريخ المغادرة</label><br>
-                                    <span>29-12-2016</span>
+                                    <label>الحد الادنى للسعر</label><br>
                                 </div>
                                 <div class="col-md-3 col-sm-6 pull-right">
-                                    <label>عدد الغرف</label><br>
-                                    <span>1</span>
-                                    <span>+</span>
+                                    <label>الحد الاقصى للسعر</label><br>
                                 </div>
                                 <div class="col-md-3 col-sm-6 pull-right">
-                                    <label>عدد الأفراد</label><br>
-                                    <span>-</span>
-                                    <span>2</span>
-                                    <span>+</span>
+                                    <label>عدد النجوم</label><br>
                                 </div>
                             </div>
                         </div>
@@ -66,62 +59,29 @@
                     <div class="panel-body">
                         <div class="text-center">
                             <div class="col-md-3 col-sm-6 pull-right">
-                                <select>
-                                    <option>وسائل الراحة</option>
+                                <select id="amenities">
+                                    <option>All</option>
+                                    @foreach($hotel_amenities as $amenity)
+                                        <option>{{$amenity->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-3 col-sm-6 pull-right">
-                                <select>
-                                    <option>نوع الغرفة</option>
-                                </select>
+                                <input type="number" id="start_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
                             </div>
                             <div class="col-md-3 col-sm-6 pull-right">
-                                <select>
-                                    <option>السعر</option>
-                                </select>
+                                <input type="number" id="end_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
                             </div>
                             <div class="col-md-3 col-sm-6 pull-right">
-                                <select>
-                                    <option>عدد النجوم</option>
+                                <select id="stars">
+                                    <option>All</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="text-right">
-                            <div class="alert alert-muted pull-right">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><img src="{{ asset('images/close-icon.png') }}"></span>
-                                </button>
-                                <span>3 نجوم</span>
-                            </div>
-                            <div class="alert alert-muted pull-right">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><img src="{{ asset('images/close-icon.png') }}"></span>
-                                </button>
-                                <span>سويت</span>
-                            </div>
-                            <div class="alert alert-muted pull-right">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><img src="{{ asset('images/close-icon.png') }}"></span>
-                                </button>
-                                <span>حمام سباحة</span>
-                            </div>
-                            <div class="alert alert-muted pull-right">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><img src="{{ asset('images/close-icon.png') }}"></span>
-                                </button>
-                                <span>جراج</span>
-                            </div>
-                            <div class="alert alert-muted pull-right">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true"><img src="{{ asset('images/close-icon.png') }}"></span>
-                                </button>
-                                <span>جيم و سبا</span>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -133,7 +93,7 @@
             <div class="container">
                 <div class="row">
 
-                    @for($i = (($num-1)*10) ; $i < (($num-1)*10)+10 ; $i++)
+                    @for($i = 0 ; $i < count($hotels) ; $i++)
                         @if(count($hotels) == $i)
                             @break
                         @else
@@ -145,11 +105,11 @@
                                             @for($j=0 ; $j < count($hotels[$i]->media) ; $j++)
                                                 @if($j == 0)
                                                     <div class="item active">
-                                                        <img src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                                        <img id="active_hotel_image" src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
                                                     </div>
                                                 @else
                                                     <div class="item">
-                                                        <img src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
+                                                        <img id="inactive_hotel_image" src="{{$hotels[$i]->media[$j]->filename}}" onerror="imgError(this)" alt="Unloaded Image..."/>
                                                     </div>
                                                 @endif
                                             @endfor
@@ -167,12 +127,12 @@
                                     <div class="caption">
                                         <div class="five-stars">
                                             @for($j=0 ; $j < $hotels[$i]->stars ; $j++)
-                                                <img src="{{ asset('images/star.png') }}" alt="Fondoq">
+                                                <img id="hotel_star_image" src="{{ asset('images/star.png') }}" alt="Fondoq">
                                             @endfor
                                         </div>
-                                        <h5>{{$hotels[$i]->name}}</h5>
-                                        <p>{{$hotels[$i]->address}}</p>
-                                        <p><a href="/room?id={{$hotels[$i]->id}}" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right">{{$hotels[$i]->max_price}}</span></p>
+                                        <h5 id="hotel_name">{{$hotels[$i]->name}}</h5>
+                                        <p id="hotel_address">{{$hotels[$i]->address}}</p>
+                                        <p><a id="hotel_room_ref" href="/room?id={{$hotels[$i]->id}}" class="btn btn-primary pull-left" role="button">احجز الان</a> <span class="pull-right" id="hotel_max_price">{{$hotels[$i]->max_price}}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -188,21 +148,21 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
-                        <span class="page">الصفحة {{$num}} من {{ ceil(count($hotels)/10) }}</span>
+                        <span class="page">الصفحة {{$num}} من {{ ceil($max/10) }}</span>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
                         <nav class="page-navigation">
-                            @for($i = 1 ; $i <= ceil(count($hotels)/10) ; $i++)
-                                @if($i == $num)
-                                    <a href="/booking?p={{$num}}" class="active">{{$num}}</a>
-                                @else
-                                    <a href="/booking?p={{$i}}">{{$i}}</a>
-                                @endif
-                            @endfor
+                            @if($num > 1)
+                                <a id="prev_page" href="/booking?p={{$num-1}}">{{$num-1}}</a>
+                            @endif
+                            <a id="curr_page" href="/booking?p={{$num}}" class="active">{{$num}}</a>
+                            @if(ceil($max/10) > $num)
+                                <a id="next_page" href="/booking?p={{$num+1}}">{{$num+1}}</a>
+                            @endif
                         </nav>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
-                        <span class="page">10 من {{count($hotels)}} فندق</span>
+                        <span class="page">10 من {{$max}} فندق</span>
                     </div>
                 </div>
             </div>
