@@ -47,8 +47,13 @@ class HomeController extends Controller{
         return View::make('home.contact');
     }
 
-    public function confirm(){
-        return View::make('home.confirm');
+    public function confirm(Request $request){
+
+        $id = $request->input('id');
+
+        $hot = Hotel::where('id', $id)->with('media')->get();
+
+        return View::make('home.confirm',compact("hot","id"));
     }
 
     public function booking(Request $request){
