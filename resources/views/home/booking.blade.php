@@ -170,6 +170,217 @@
         <!-- End Pagination -->
 
     </div><!-- END CONTENT -->
+    @section("hotelsearch")
+        <script type="text/javascript">
+            $(document).ready(function(){ /* PREPARE THE SCRIPT */
+                console.log("Inside JQ");
+                $("#amenities").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
+                    console.log("Inside amenities");
+                    var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
 
+                    $.ajax({ /* THEN THE AJAX CALL */
+                        type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
+                        url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
+                        data: {
+                            p: 1,
+                            ajax: true,
+                            amenity: amenity,
+                            start_price: start_price,
+                            end_price: end_price,
+                            stars: stars
+                        }, /* THE DATA WE WILL BE PASSING */
+                        success: function(result){ /* GET THE TO BE RETURNED DATA */
+                            console.log("Success "+result);
+                            var count = Object.keys(result).length;
+                            for(var i = 0 ; i < count ; i++){
+                                if(count === i){
+                                    break;
+                                } else {
+                                    var mcount = Object.keys(result[i].media).length;
+                                    for (var j = 0; j < mcount; j++) {
+                                        if (j == 0) {
+                                            $("#active_hotel_image").attr("src", result[i].media[j].filename);
+                                        }
+                                        else {
+                                            $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
+                                        }
+                                    }
+
+                                    for (j = 0; j < result[i].stars; j++) {
+                                        $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
+                                    }
+                                    document.getElementById("hotel_name").innerHTML = result[i].name;
+                                    document.getElementById("hotel_address").innerHTML = result[i].address;
+                                    $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
+                                }
+                            }
+
+                            $("#curr_page").attr("href", "#");
+                            $("#prev_page").remove();
+                            $("#next_page").remove();
+                        }
+                    });
+                });
+
+                $('#start_price').keypress(function(e){
+                    if(e.keyCode==13){
+                        var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+
+                        $.ajax({ /* THEN THE AJAX CALL */
+                            type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
+                            url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
+                            data: {
+                                p: 1,
+                                ajax: true,
+                                amenity: amenity,
+                                start_price: start_price,
+                                end_price: end_price,
+                                stars: stars
+                            }, /* THE DATA WE WILL BE PASSING */
+                            success: function(result){ /* GET THE TO BE RETURNED DATA */
+                                console.log("Success "+result);
+                                var count = Object.keys(result).length;
+                                for(var i = 0 ; i < count ; i++){
+                                    if(count === i){
+                                        break;
+                                    } else {
+                                        var mcount = Object.keys(result[i].media).length;
+                                        for (var j = 0; j < mcount; j++) {
+                                            if (j == 0) {
+                                                $("#active_hotel_image").attr("src", result[i].media[j].filename);
+                                            }
+                                            else {
+                                                $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
+                                            }
+                                        }
+
+                                        for (j = 0; j < result[i].stars; j++) {
+                                            $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
+                                        }
+                                        document.getElementById("hotel_name").innerHTML = result[i].name;
+                                        document.getElementById("hotel_address").innerHTML = result[i].address;
+                                        $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
+                                    }
+                                }
+
+                                $("#curr_page").attr("href", "#");
+                                $("#prev_page").remove();
+                                $("#next_page").remove();
+                            }
+                        });
+                    }
+                });
+
+                $('#end_price').keypress(function(e){
+                    if(e.keyCode==13){
+                        var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                        var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+
+                        $.ajax({ /* THEN THE AJAX CALL */
+                            type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
+                            url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
+                            data: {
+                                p: 1,
+                                ajax: true,
+                                amenity: amenity,
+                                start_price: start_price,
+                                end_price: end_price,
+                                stars: stars
+                            }, /* THE DATA WE WILL BE PASSING */
+                            success: function(result){ /* GET THE TO BE RETURNED DATA */
+                                console.log("Success "+result);
+                                var count = Object.keys(result).length;
+                                for(var i = 0 ; i < count ; i++){
+                                    if(count === i){
+                                        break;
+                                    } else {
+                                        var mcount = Object.keys(result[i].media).length;
+                                        for (var j = 0; j < mcount; j++) {
+                                            if (j == 0) {
+                                                $("#active_hotel_image").attr("src", result[i].media[j].filename);
+                                            }
+                                            else {
+                                                $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
+                                            }
+                                        }
+
+                                        for (j = 0; j < result[i].stars; j++) {
+                                            $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
+                                        }
+                                        document.getElementById("hotel_name").innerHTML = result[i].name;
+                                        document.getElementById("hotel_address").innerHTML = result[i].address;
+                                        $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
+                                    }
+                                }
+
+                                $("#curr_page").attr("href", "#");
+                                $("#prev_page").remove();
+                                $("#next_page").remove();
+                            }
+                        });
+                    }
+                });
+
+                $("#stars").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
+                    var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                    var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+
+                    $.ajax({ /* THEN THE AJAX CALL */
+                        type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
+                        url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
+                        data: {
+                            p: 1,
+                            ajax: true,
+                            amenity: amenity,
+                            start_price: start_price,
+                            end_price: end_price,
+                            stars: stars
+                        }, /* THE DATA WE WILL BE PASSING */
+                        success: function(result){ /* GET THE TO BE RETURNED DATA */
+                            console.log("Success "+result);
+                            var count = Object.keys(result).length;
+                            for(var i = 0 ; i < count ; i++){
+                                if(count === i){
+                                    break;
+                                } else {
+                                    var mcount = Object.keys(result[i].media).length;
+                                    for (var j = 0; j < mcount; j++) {
+                                        if (j == 0) {
+                                            $("#active_hotel_image").attr("src", result[i].media[j].filename);
+                                        }
+                                        else {
+                                            $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
+                                        }
+                                    }
+
+                                    for (j = 0; j < result[i].stars; j++) {
+                                        $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
+                                    }
+                                    document.getElementById("hotel_name").innerHTML = result[i].name;
+                                    document.getElementById("hotel_address").innerHTML = result[i].address;
+                                    $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
+                                }
+                            }
+
+                            $("#curr_page").attr("href", "#");
+                            $("#prev_page").remove();
+                            $("#next_page").remove();
+                        }
+                    });
+                });
+
+            });
+        </script>
     @endsection
 
+@endsection

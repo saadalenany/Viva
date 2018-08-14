@@ -9,6 +9,7 @@ use App\models\Media;
 use App\models\RoomDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller{
@@ -81,7 +82,15 @@ class HomeController extends Controller{
             $hotels = Hotel::where('stars',$stars)->with('media')->get();
         }
         if ($amenity != "All"){
-            $hotels = Hotel::with('hotel_amenities')->where('name',$amenity)->get();
+//            $hotels = DB::select( DB::raw("SELECT * FROM `hotels` JOIN `hotel_amenities` WHERE `hotels`.`id` = `hotel_amenities`.`hotels_id` AND `hotel_amenities`.`name` = :amenity"), array(
+//                'amenity' => $amenity,
+//            ));
+
+            $hotels = DB::table('hotels')
+                        ->join('hotel_amenities','hotels.id','=','hotel_amenities.hotels_id')
+                        ->join('media','hotels.id','=','media.hotels_id')
+                        ->select('hotels.*','media.*')
+                        ->get();
         }
         if ($start_price != ""){
             $hotels = Hotel::where('min_price',$start_price)->with('media')->get();
