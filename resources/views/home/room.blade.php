@@ -97,8 +97,8 @@
                             <div class="row">
                                 @foreach($room_amenities as $room)
                                     <div class="col-sm-12">
-                                        <input type="checkbox" id="room-check">
-                                        <label for="room-check"><span>  </span><small>{{$room->name}}</small></label>
+                                        <input type="checkbox" id="room-check[]">
+                                        <label for="room-check[]"><span>  </span><small>{{$room->name}}</small></label>
                                         <ul class="list">
                                             @foreach($room->room_amenities as $amn)
                                                 <li><span>{{$amn->name}}</span></li>

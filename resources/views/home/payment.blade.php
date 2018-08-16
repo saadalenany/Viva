@@ -50,86 +50,85 @@
                 </div>
 
                 <!-- Info -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <img src="{{ asset('images/info-icon.png') }}" alt="fondoq">
-                        <span>معلوماتك</span>
-                    </div>
-                    <div class="panel-body">
-                        <form class="form-horizontal">
+                <form class="form-horizontal" action="/confirm" method="get">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <img src="{{ asset('images/info-icon.png') }}" alt="fondoq">
+                            <span>معلوماتك</span>
+                        </div>
+                        <input type="hidden" value="{{$hot[0]->id}}" name="id"/>
+                        <div class="panel-body">
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 pull-right control-label">الإسم بالكامل</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="text" class="form-control" id="inputName">
+                                    <input type="text" class="form-control" id="inputName" name="inputName"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputMobile" class="col-sm-2 pull-right control-label">الجوال</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="tel" class="form-control" id="inputMobile">
+                                    <input type="tel" class="form-control" id="inputMobile" name="inputMobile"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 pull-right control-label">البريد الإلكتروني</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="email" class="form-control" id="inputEmail">
+                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail"/>
                                 </div>
                             </div>
                             <hr>
                             <div class="form-group">
                                 <label for="inputComments" class="col-sm-2 pull-right control-label">طلبات خاصة</label>
                                 <div class="col-sm-10 pull-right">
-                                    <textarea class="form-control" id="inputComments" rows="7"></textarea>
+                                    <textarea class="form-control" id="inputComments" name="inputComments" rows="7"></textarea>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Credit -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <img src="{{ asset('images/visa.png') }}" alt="fondoq">
-                        <span>تفاصيل البطاقة</span>
-                    </div>
-                    <div class="panel-body">
-                        <form class="form-horizontal">
+                    <!-- Credit -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <img src="{{ asset('images/visa.png') }}" alt="fondoq">
+                            <span>تفاصيل البطاقة</span>
+                        </div>
+                        <div class="panel-body">
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 pull-right control-label">الإسم   كما يظهر على البطاقة</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="text" class="form-control" id="inputName">
+                                    <input type="text" class="form-control" id="inputName" name="inputCardName"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputNumber" class="col-sm-2 pull-right control-label">رقم البطاقة</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="number" class="form-control" id="inputNumber">
+                                    <input type="number" class="form-control" id="inputNumber" name="inputCardNumber"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputMonth inputYear" class="col-sm-2 pull-right control-label">تاريخ الإنتهاء</label>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control text-center" id="inputMonth" placeholder="الشهر">
+                                    <input type="number" class="form-control text-center" id="inputMonth" name="inputCardMonth" placeholder="الشهر">
                                 </div>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control text-center" id="inputYear" placeholder="السنة">
+                                    <input type="number" class="form-control text-center" id="inputYear" name="inputCardYear" placeholder="السنة">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputSecure" class="col-sm-2 pull-right control-label">رمز الحماية الثلاثي الموجود خلف البطاقة</label>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control" id="inputSecure">
+                                    <input type="number" class="form-control" id="inputSecure" name="inputCardSecure">
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                    <!-- Submit Button -->
+                    <div class="submit-btn text-left">
+                        <p class="pull-right text-right">بإكمالي هذا الجزء فإني أقر بإطلاعي وموافقتي على <a href="#" class="text-danger">سياسة الخصوصية</a> المطبقة على هذا الحجز</p>
+                        <button type="submit" class="btn btn-danger">متابعة</button>
+                    </div>
+                </form>
 
-                <!-- Submit Button -->
-                <div class="submit-btn text-left">
-                    <p class="pull-right text-right">بإكمالي هذا الجزء فإني أقر بإطلاعي وموافقتي على <a href="#" class="text-danger">سياسة الخصوصية</a> المطبقة على هذا الحجز</p>
-                    <a href="/confirm?id={{$hot[0]->id}}" class="btn btn-danger">متابعة</a>
-                </div>
             </div>
         </div><!-- End Search -->
 

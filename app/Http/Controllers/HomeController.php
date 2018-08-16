@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\City;
+use App\models\CreditCardUser;
 use App\models\Hotel;
 use App\models\HotelAmenities;
 use App\models\Media;
@@ -51,11 +52,41 @@ class HomeController extends Controller{
     public function confirm(Request $request){
 
         $id = $request->input('id');
-        $input = Input::only('name','email','password');
+
+        $inputName = $request->input('inputName');
+        $inputMobile = $request->input('inputMobile');
+        $inputEmail = $request->input('inputEmail');
+        $inputComments = $request->input('inputComments');
+
+        $inputCardName = $request->input('inputCardName');
+        $inputCardNumber = $request->input('inputCardNumber');
+        $inputCardMonth = $request->input('inputCardMonth');
+        $inputCardYear = $request->input('inputCardYear');
+        $inputCardSecure = $request->input('inputCardSecure');
+
+        if ($inputName==null){$inputName='';}
+        if ($inputMobile==null){$inputMobile='';}
+        if ($inputEmail==null){$inputEmail='';}
+        if ($inputComments==null){$inputComments='';}
+        if ($inputCardName==null){$inputCardName='';}
+        if ($inputCardNumber==null){$inputCardNumber=0;}
+        if ($inputCardMonth==null){$inputCardMonth=1;}
+        if ($inputCardYear==null){$inputCardYear=2000;}
+        if ($inputCardSecure==null){$inputCardSecure='';}
+
+        $creditCardUser = new CreditCardUser($inputName,
+                                             $inputMobile,
+                                             $inputEmail,
+                                             $inputComments,
+                                             $inputCardName,
+                                             (int)$inputCardNumber,
+                                             (int)$inputCardMonth,
+                                             (int)$inputCardYear,
+                                             $inputCardSecure);
 
         $hot = Hotel::where('id', $id)->with('media')->get();
 
-        return View::make('home.confirm',compact("hot","id"));
+        return View::make('home.confirm',compact("hot","id","creditCardUser"));
     }
 
     public function booking(Request $request){

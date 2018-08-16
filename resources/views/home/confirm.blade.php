@@ -30,8 +30,8 @@
                             <div class="col-md-5 col-sm-6 pull-right">
                                 <div class="desc">
                                     <h5>إصدار فاتورة الى</h5>
-                                    <h5 class="text-danger">محمد عبد الرحمن المقدم </h5>
-                                    <h6 class="text-default">كورنيش النيل شارع مجلس الشعب الجيزة القاهرة </h6>
+                                    <h5 class="text-danger">{{$creditCardUser->inputName}}</h5>
+                                    <h6 class="text-default">{{$hot[0]->address}}</h6>
                                 </div>
                             </div>
                             <div class="col-md-7 col-sm-6 pull-right">
@@ -66,7 +66,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th class="text-right">فندق فور سيزون نايل بلازا  - 1 غرفة دبل</th>
+                                            <th class="text-right">{{$hot[0]->name}}</th>
                                             <th class="text-center">1</th>
                                             <th class="text-center">450 جنيه</th>
                                             <th class="text-center">450 جنيه <hr></th>
