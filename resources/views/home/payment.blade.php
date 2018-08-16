@@ -128,7 +128,7 @@
                 <!-- Submit Button -->
                 <div class="submit-btn text-left">
                     <p class="pull-right text-right">بإكمالي هذا الجزء فإني أقر بإطلاعي وموافقتي على <a href="#" class="text-danger">سياسة الخصوصية</a> المطبقة على هذا الحجز</p>
-                    <a href="/confirm" class="btn btn-danger">متابعة</a>
+                    <a href="/confirm?id={{$hot[0]->id}}" class="btn btn-danger">متابعة</a>
                 </div>
             </div>
         </div><!-- End Search -->

@@ -10,6 +10,7 @@ use App\models\RoomDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller{
@@ -50,6 +51,7 @@ class HomeController extends Controller{
     public function confirm(Request $request){
 
         $id = $request->input('id');
+        $input = Input::only('name','email','password');
 
         $hot = Hotel::where('id', $id)->with('media')->get();
 
@@ -75,35 +77,38 @@ class HomeController extends Controller{
         return View::make('home.about');
     }
 
-    public function filterHotels(){
-        $amenity = $_REQUEST["amenity"];
-        $start_price = $_REQUEST["start_price"];
-        $end_price = $_REQUEST["end_price"];
-        $stars = $_REQUEST["stars"];
+    public function filterHotels(Request $request){
+
+        $amenity = $request->input("amenity");
+        $start_price = $request->input("start_price");
+        $end_price = $request->input("end_price");
+        $stars = $request->input("stars");
 
         $hotels = Hotel::with('media')->get();
 
         if ($stars != "All"){
-            $hotels = Hotel::where('stars',$stars)->with('media')->get();
+            $hotels = Hotel::where('stars',(int)$stars)->with('media')->get();
         }
         if ($amenity != "All"){
 //            $hotels = DB::select( DB::raw("SELECT * FROM `hotels` JOIN `hotel_amenities` WHERE `hotels`.`id` = `hotel_amenities`.`hotels_id` AND `hotel_amenities`.`name` = :amenity"), array(
 //                'amenity' => $amenity,
 //            ));
 
-            $hotels = DB::table('hotels')
-                        ->join('hotel_amenities','hotels.id','=','hotel_amenities.hotels_id')
-                        ->join('media','hotels.id','=','media.hotels_id')
-                        ->select('hotels.*','media.*')
-                        ->get();
+//            $hotels = DB::table('hotels')
+//                        ->join('hotel_amenities','hotels.id','=','hotel_amenities.hotels_id')
+//                        ->join('media','hotels.id','=','media.hotels_id')
+//                        ->select('hotels.*','media.*')
+//                        ->get();
         }
         if ($start_price != ""){
-            $hotels = Hotel::where('min_price',$start_price)->with('media')->get();
+            $hotels = Hotel::where('min_price',(int)$start_price)->with('media')->get();
         }
         if ($end_price != ""){
-            $hotels = Hotel::where('max_price',$end_price)->with('media')->get();
+            $hotels = Hotel::where('max_price',(int)$end_price)->with('media')->get();
         }
 
-        return json_encode($hotels);
+        $hotel_amenities = HotelAmenities::with('amenities')->get();
+
+        return View::make('home.filter', compact('hotels', 'hotel_amenities'));
     }
 }

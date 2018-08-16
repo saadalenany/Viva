@@ -105,7 +105,7 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-@yield("hotelsearch")
+{{--@yield("hotelsearch")--}}
 
 </body>
 </html>

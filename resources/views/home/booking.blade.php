@@ -55,36 +55,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="text-center">
-                            <div class="col-md-3 col-sm-6 pull-right">
-                                <select id="amenities">
-                                    <option>All</option>
-                                    @foreach($hotel_amenities as $amenity)
-                                        <option>{{$amenity->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-3 col-sm-6 pull-right">
-                                <input type="number" id="start_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
-                            </div>
-                            <div class="col-md-3 col-sm-6 pull-right">
-                                <input type="number" id="end_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
-                            </div>
-                            <div class="col-md-3 col-sm-6 pull-right">
-                                <select id="stars">
-                                    <option>All</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                <form action="/filter" method="get">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center">
+                                <div class="col-md-3 col-sm-6 pull-right">
+                                    <select name="amenities" id="amenities">
+                                        <option>All</option>
+                                        @foreach($hotel_amenities as $amenity)
+                                            <option>{{$amenity->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-6 pull-right">
+                                    <input type="number" name="start_price" id="start_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
+                                </div>
+                                <div class="col-md-3 col-sm-6 pull-right">
+                                    <input type="number" name="end_price" id="end_price" min="0" step="10" placeholder="Price in USD" style="padding:10px; height:40px;"/>
+                                </div>
+                                <div class="col-md-3 col-sm-6 pull-right">
+                                    <select name="stars" id="stars">
+                                        <option>All</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                        <input class="btn btn-primary pull-left" style="width: 100%;margin-bottom: 10px;" type="submit" value="Search"/>
                     </div>
-                </div>
+                </form>
             </div>
         </div><!-- End Search -->
 
@@ -170,217 +173,217 @@
         <!-- End Pagination -->
 
     </div><!-- END CONTENT -->
-    @section("hotelsearch")
-        <script type="text/javascript">
-            $(document).ready(function(){ /* PREPARE THE SCRIPT */
-                console.log("Inside JQ");
-                $("#amenities").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
-                    console.log("Inside amenities");
-                    var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+    {{--@section("hotelsearch")--}}
+        {{--<script type="text/javascript">--}}
+            {{--$(document).ready(function(){ /* PREPARE THE SCRIPT */--}}
+                {{--console.log("Inside JQ");--}}
+                {{--$("#amenities").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */--}}
+                    {{--console.log("Inside amenities");--}}
+                    {{--var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
 
-                    $.ajax({ /* THEN THE AJAX CALL */
-                        type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
-                        url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
-                        data: {
-                            p: 1,
-                            ajax: true,
-                            amenity: amenity,
-                            start_price: start_price,
-                            end_price: end_price,
-                            stars: stars
-                        }, /* THE DATA WE WILL BE PASSING */
-                        success: function(result){ /* GET THE TO BE RETURNED DATA */
-                            console.log("Success "+result);
-                            var count = Object.keys(result).length;
-                            for(var i = 0 ; i < count ; i++){
-                                if(count === i){
-                                    break;
-                                } else {
-                                    var mcount = Object.keys(result[i].media).length;
-                                    for (var j = 0; j < mcount; j++) {
-                                        if (j == 0) {
-                                            $("#active_hotel_image").attr("src", result[i].media[j].filename);
-                                        }
-                                        else {
-                                            $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
-                                        }
-                                    }
+                    {{--$.ajax({ /* THEN THE AJAX CALL */--}}
+                        {{--type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */--}}
+                        {{--url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */--}}
+                        {{--data: {--}}
+                            {{--p: 1,--}}
+                            {{--ajax: true,--}}
+                            {{--amenity: amenity,--}}
+                            {{--start_price: start_price,--}}
+                            {{--end_price: end_price,--}}
+                            {{--stars: stars--}}
+                        {{--}, /* THE DATA WE WILL BE PASSING */--}}
+                        {{--success: function(result){ /* GET THE TO BE RETURNED DATA */--}}
+                            {{--console.log("Success "+result);--}}
+                            {{--var count = Object.keys(result).length;--}}
+                            {{--for(var i = 0 ; i < count ; i++){--}}
+                                {{--if(count === i){--}}
+                                    {{--break;--}}
+                                {{--} else {--}}
+                                    {{--var mcount = Object.keys(result[i].media).length;--}}
+                                    {{--for (var j = 0; j < mcount; j++) {--}}
+                                        {{--if (j == 0) {--}}
+                                            {{--$("#active_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                        {{--}--}}
+                                        {{--else {--}}
+                                            {{--$("#inactive_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                        {{--}--}}
+                                    {{--}--}}
 
-                                    for (j = 0; j < result[i].stars; j++) {
-                                        $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
-                                    }
-                                    document.getElementById("hotel_name").innerHTML = result[i].name;
-                                    document.getElementById("hotel_address").innerHTML = result[i].address;
-                                    $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
-                                }
-                            }
+                                    {{--for (j = 0; j < result[i].stars; j++) {--}}
+                                        {{--$("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");--}}
+                                    {{--}--}}
+                                    {{--document.getElementById("hotel_name").innerHTML = result[i].name;--}}
+                                    {{--document.getElementById("hotel_address").innerHTML = result[i].address;--}}
+                                    {{--$("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);--}}
+                                {{--}--}}
+                            {{--}--}}
 
-                            $("#curr_page").attr("href", "#");
-                            $("#prev_page").remove();
-                            $("#next_page").remove();
-                        }
-                    });
-                });
+                            {{--$("#curr_page").attr("href", "#");--}}
+                            {{--$("#prev_page").remove();--}}
+                            {{--$("#next_page").remove();--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--});--}}
 
-                $('#start_price').keypress(function(e){
-                    if(e.keyCode==13){
-                        var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                {{--$('#start_price').keypress(function(e){--}}
+                    {{--if(e.keyCode==13){--}}
+                        {{--var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
 
-                        $.ajax({ /* THEN THE AJAX CALL */
-                            type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
-                            url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
-                            data: {
-                                p: 1,
-                                ajax: true,
-                                amenity: amenity,
-                                start_price: start_price,
-                                end_price: end_price,
-                                stars: stars
-                            }, /* THE DATA WE WILL BE PASSING */
-                            success: function(result){ /* GET THE TO BE RETURNED DATA */
-                                console.log("Success "+result);
-                                var count = Object.keys(result).length;
-                                for(var i = 0 ; i < count ; i++){
-                                    if(count === i){
-                                        break;
-                                    } else {
-                                        var mcount = Object.keys(result[i].media).length;
-                                        for (var j = 0; j < mcount; j++) {
-                                            if (j == 0) {
-                                                $("#active_hotel_image").attr("src", result[i].media[j].filename);
-                                            }
-                                            else {
-                                                $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
-                                            }
-                                        }
+                        {{--$.ajax({ /* THEN THE AJAX CALL */--}}
+                            {{--type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */--}}
+                            {{--url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */--}}
+                            {{--data: {--}}
+                                {{--p: 1,--}}
+                                {{--ajax: true,--}}
+                                {{--amenity: amenity,--}}
+                                {{--start_price: start_price,--}}
+                                {{--end_price: end_price,--}}
+                                {{--stars: stars--}}
+                            {{--}, /* THE DATA WE WILL BE PASSING */--}}
+                            {{--success: function(result){ /* GET THE TO BE RETURNED DATA */--}}
+                                {{--console.log("Success "+result);--}}
+                                {{--var count = Object.keys(result).length;--}}
+                                {{--for(var i = 0 ; i < count ; i++){--}}
+                                    {{--if(count === i){--}}
+                                        {{--break;--}}
+                                    {{--} else {--}}
+                                        {{--var mcount = Object.keys(result[i].media).length;--}}
+                                        {{--for (var j = 0; j < mcount; j++) {--}}
+                                            {{--if (j == 0) {--}}
+                                                {{--$("#active_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                            {{--}--}}
+                                            {{--else {--}}
+                                                {{--$("#inactive_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                            {{--}--}}
+                                        {{--}--}}
 
-                                        for (j = 0; j < result[i].stars; j++) {
-                                            $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
-                                        }
-                                        document.getElementById("hotel_name").innerHTML = result[i].name;
-                                        document.getElementById("hotel_address").innerHTML = result[i].address;
-                                        $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
-                                    }
-                                }
+                                        {{--for (j = 0; j < result[i].stars; j++) {--}}
+                                            {{--$("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");--}}
+                                        {{--}--}}
+                                        {{--document.getElementById("hotel_name").innerHTML = result[i].name;--}}
+                                        {{--document.getElementById("hotel_address").innerHTML = result[i].address;--}}
+                                        {{--$("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);--}}
+                                    {{--}--}}
+                                {{--}--}}
 
-                                $("#curr_page").attr("href", "#");
-                                $("#prev_page").remove();
-                                $("#next_page").remove();
-                            }
-                        });
-                    }
-                });
+                                {{--$("#curr_page").attr("href", "#");--}}
+                                {{--$("#prev_page").remove();--}}
+                                {{--$("#next_page").remove();--}}
+                            {{--}--}}
+                        {{--});--}}
+                    {{--}--}}
+                {{--});--}}
 
-                $('#end_price').keypress(function(e){
-                    if(e.keyCode==13){
-                        var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                        var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                {{--$('#end_price').keypress(function(e){--}}
+                    {{--if(e.keyCode==13){--}}
+                        {{--var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                        {{--var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
 
-                        $.ajax({ /* THEN THE AJAX CALL */
-                            type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
-                            url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
-                            data: {
-                                p: 1,
-                                ajax: true,
-                                amenity: amenity,
-                                start_price: start_price,
-                                end_price: end_price,
-                                stars: stars
-                            }, /* THE DATA WE WILL BE PASSING */
-                            success: function(result){ /* GET THE TO BE RETURNED DATA */
-                                console.log("Success "+result);
-                                var count = Object.keys(result).length;
-                                for(var i = 0 ; i < count ; i++){
-                                    if(count === i){
-                                        break;
-                                    } else {
-                                        var mcount = Object.keys(result[i].media).length;
-                                        for (var j = 0; j < mcount; j++) {
-                                            if (j == 0) {
-                                                $("#active_hotel_image").attr("src", result[i].media[j].filename);
-                                            }
-                                            else {
-                                                $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
-                                            }
-                                        }
+                        {{--$.ajax({ /* THEN THE AJAX CALL */--}}
+                            {{--type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */--}}
+                            {{--url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */--}}
+                            {{--data: {--}}
+                                {{--p: 1,--}}
+                                {{--ajax: true,--}}
+                                {{--amenity: amenity,--}}
+                                {{--start_price: start_price,--}}
+                                {{--end_price: end_price,--}}
+                                {{--stars: stars--}}
+                            {{--}, /* THE DATA WE WILL BE PASSING */--}}
+                            {{--success: function(result){ /* GET THE TO BE RETURNED DATA */--}}
+                                {{--console.log("Success "+result);--}}
+                                {{--var count = Object.keys(result).length;--}}
+                                {{--for(var i = 0 ; i < count ; i++){--}}
+                                    {{--if(count === i){--}}
+                                        {{--break;--}}
+                                    {{--} else {--}}
+                                        {{--var mcount = Object.keys(result[i].media).length;--}}
+                                        {{--for (var j = 0; j < mcount; j++) {--}}
+                                            {{--if (j == 0) {--}}
+                                                {{--$("#active_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                            {{--}--}}
+                                            {{--else {--}}
+                                                {{--$("#inactive_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                            {{--}--}}
+                                        {{--}--}}
 
-                                        for (j = 0; j < result[i].stars; j++) {
-                                            $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
-                                        }
-                                        document.getElementById("hotel_name").innerHTML = result[i].name;
-                                        document.getElementById("hotel_address").innerHTML = result[i].address;
-                                        $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
-                                    }
-                                }
+                                        {{--for (j = 0; j < result[i].stars; j++) {--}}
+                                            {{--$("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");--}}
+                                        {{--}--}}
+                                        {{--document.getElementById("hotel_name").innerHTML = result[i].name;--}}
+                                        {{--document.getElementById("hotel_address").innerHTML = result[i].address;--}}
+                                        {{--$("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);--}}
+                                    {{--}--}}
+                                {{--}--}}
 
-                                $("#curr_page").attr("href", "#");
-                                $("#prev_page").remove();
-                                $("#next_page").remove();
-                            }
-                        });
-                    }
-                });
+                                {{--$("#curr_page").attr("href", "#");--}}
+                                {{--$("#prev_page").remove();--}}
+                                {{--$("#next_page").remove();--}}
+                            {{--}--}}
+                        {{--});--}}
+                    {{--}--}}
+                {{--});--}}
 
-                $("#stars").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */
-                    var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */
-                    var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */
+                {{--$("#stars").change(function(){ /* WHEN YOU CHANGE AND SELECT FROM THE SELECT FIELD */--}}
+                    {{--var amenity = $("#amenities").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var start_price = $("#start_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var end_price = $("#end_price").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
+                    {{--var stars = $("#stars").val(); /* GET THE VALUE OF THE SELECTED DATA */--}}
 
-                    $.ajax({ /* THEN THE AJAX CALL */
-                        type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */
-                        url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */
-                        data: {
-                            p: 1,
-                            ajax: true,
-                            amenity: amenity,
-                            start_price: start_price,
-                            end_price: end_price,
-                            stars: stars
-                        }, /* THE DATA WE WILL BE PASSING */
-                        success: function(result){ /* GET THE TO BE RETURNED DATA */
-                            console.log("Success "+result);
-                            var count = Object.keys(result).length;
-                            for(var i = 0 ; i < count ; i++){
-                                if(count === i){
-                                    break;
-                                } else {
-                                    var mcount = Object.keys(result[i].media).length;
-                                    for (var j = 0; j < mcount; j++) {
-                                        if (j == 0) {
-                                            $("#active_hotel_image").attr("src", result[i].media[j].filename);
-                                        }
-                                        else {
-                                            $("#inactive_hotel_image").attr("src", result[i].media[j].filename);
-                                        }
-                                    }
+                    {{--$.ajax({ /* THEN THE AJAX CALL */--}}
+                        {{--type: "GET", /* TYPE OF METHOD TO USE TO PASS THE DATA */--}}
+                        {{--url: "{{ action('HomeController@filterHotels') }}", /* PAGE WHERE WE WILL PASS THE DATA */--}}
+                        {{--data: {--}}
+                            {{--p: 1,--}}
+                            {{--ajax: true,--}}
+                            {{--amenity: amenity,--}}
+                            {{--start_price: start_price,--}}
+                            {{--end_price: end_price,--}}
+                            {{--stars: stars--}}
+                        {{--}, /* THE DATA WE WILL BE PASSING */--}}
+                        {{--success: function(result){ /* GET THE TO BE RETURNED DATA */--}}
+                            {{--console.log("Success "+result);--}}
+                            {{--var count = Object.keys(result).length;--}}
+                            {{--for(var i = 0 ; i < count ; i++){--}}
+                                {{--if(count === i){--}}
+                                    {{--break;--}}
+                                {{--} else {--}}
+                                    {{--var mcount = Object.keys(result[i].media).length;--}}
+                                    {{--for (var j = 0; j < mcount; j++) {--}}
+                                        {{--if (j == 0) {--}}
+                                            {{--$("#active_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                        {{--}--}}
+                                        {{--else {--}}
+                                            {{--$("#inactive_hotel_image").attr("src", result[i].media[j].filename);--}}
+                                        {{--}--}}
+                                    {{--}--}}
 
-                                    for (j = 0; j < result[i].stars; j++) {
-                                        $("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");
-                                    }
-                                    document.getElementById("hotel_name").innerHTML = result[i].name;
-                                    document.getElementById("hotel_address").innerHTML = result[i].address;
-                                    $("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);
-                                }
-                            }
+                                    {{--for (j = 0; j < result[i].stars; j++) {--}}
+                                        {{--$("#hotel_star_image").attr("src", "{{ asset('images/star.png') }}");--}}
+                                    {{--}--}}
+                                    {{--document.getElementById("hotel_name").innerHTML = result[i].name;--}}
+                                    {{--document.getElementById("hotel_address").innerHTML = result[i].address;--}}
+                                    {{--$("#hotel_room_ref").attr("href", "/room?id=" + result[i].id);--}}
+                                {{--}--}}
+                            {{--}--}}
 
-                            $("#curr_page").attr("href", "#");
-                            $("#prev_page").remove();
-                            $("#next_page").remove();
-                        }
-                    });
-                });
+                            {{--$("#curr_page").attr("href", "#");--}}
+                            {{--$("#prev_page").remove();--}}
+                            {{--$("#next_page").remove();--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--});--}}
 
-            });
-        </script>
-    @endsection
+            {{--});--}}
+        {{--</script>--}}
+    {{--@endsection--}}
 
 @endsection
