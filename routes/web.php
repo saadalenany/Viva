@@ -17,13 +17,13 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/payment', 'HomeController@payment');
+Route::post('/payment', 'HomeController@payment');
 
 Route::get('/room', 'HomeController@room');
 
 Route::get('/contact', 'HomeController@contact');
 
-Route::get('/confirm', 'HomeController@confirm');
+Route::post('/confirm', 'HomeController@confirm');
 
 Route::get('/booking', 'HomeController@booking');
 

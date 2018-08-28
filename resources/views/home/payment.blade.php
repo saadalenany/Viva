@@ -28,18 +28,20 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-6 pull-right">
                                 <div class="desc">
-                                    <h5>{{$hot[0]->name}}</h5>
+                                    <h5>{{$hot->name}}</h5>
                                     <div class="five-stars">
-                                        @for($j=0 ; $j < $hot[0]->stars ; $j++)
+                                        @for($j=0 ; $j < $hot->stars ; $j++)
                                             <img src="{{ asset('images/star.png') }}" alt="Fondoq">
                                         @endfor
                                     </div>
                                     <div class="clearfix"></div>
-                                    <h5>{{$hot[0]->address}}</h5>
-                                    <p><img src="{{ asset('images/check_out.png') }}"><span>تاريخ الوصول</span> - <span>{{$hot[0]->created_at}}</span></p>
-                                    <p><img src="{{ asset('images/check_in.png') }}"><span>تاريخ المغادرة</span> - <span>{{$hot[0]->updated_at}}</span></p>
-                                    <p><img src="{{ asset('images/profile-icon.png') }}"><span>غرفة كلاسيك مزدوجة أو توأمية</span></p>
-                                    <h1 class="text-danger">7٫424 جنيه</h1>
+                                    <h5>{{$hot->address}}</h5>
+                                    <p><img src="{{ asset('images/check_out.png') }}"><span>تاريخ الوصول</span> - <span>{{$hot->created_at}}</span></p>
+                                    <p><img src="{{ asset('images/check_in.png') }}"><span>تاريخ المغادرة</span> - <span>{{$hot->updated_at}}</span></p>
+                                    @foreach($room_checked as $room)
+                                        <p><img src="{{ asset('images/profile-icon.png') }}"><span>{{$room->name}}</span></p>
+                                    @endforeach
+                                    <h1 class="text-danger">{{$total}}</h1>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 pull-right">
@@ -50,30 +52,33 @@
                 </div>
 
                 <!-- Info -->
-                <form class="form-horizontal" action="/confirm" method="get">
+                <form class="form-horizontal" action="/confirm" method="post">
+                    {{ csrf_field() }}
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <img src="{{ asset('images/info-icon.png') }}" alt="fondoq">
                             <span>معلوماتك</span>
                         </div>
-                        <input type="hidden" value="{{$hot[0]->id}}" name="id"/>
+                        <input type="hidden" value="{{$total}}" name="total"/>
+                        <input type="hidden" name="id" value="{{$hot->id}}"/>
+                        <input type="hidden" name="room_checked" value="{{json_encode($room_checked)}}"/>
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 pull-right control-label">الإسم بالكامل</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="text" class="form-control" id="inputName" name="inputName"/>
+                                    <input type="text" class="form-control" id="inputName" name="inputName" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputMobile" class="col-sm-2 pull-right control-label">الجوال</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="tel" class="form-control" id="inputMobile" name="inputMobile"/>
+                                    <input type="tel" class="form-control" id="inputMobile" name="inputMobile" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 pull-right control-label">البريد الإلكتروني</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail"/>
+                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" required/>
                                 </div>
                             </div>
                             <hr>
@@ -96,28 +101,28 @@
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 pull-right control-label">الإسم   كما يظهر على البطاقة</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="text" class="form-control" id="inputName" name="inputCardName"/>
+                                    <input type="text" class="form-control" id="inputName" name="inputCardName" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputNumber" class="col-sm-2 pull-right control-label">رقم البطاقة</label>
                                 <div class="col-sm-4 pull-right">
-                                    <input type="number" class="form-control" id="inputNumber" name="inputCardNumber"/>
+                                    <input type="number" class="form-control" id="inputNumber" name="inputCardNumber" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputMonth inputYear" class="col-sm-2 pull-right control-label">تاريخ الإنتهاء</label>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control text-center" id="inputMonth" name="inputCardMonth" placeholder="الشهر">
+                                    <input type="number" class="form-control text-center" id="inputMonth" name="inputCardMonth" placeholder="الشهر" required>
                                 </div>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control text-center" id="inputYear" name="inputCardYear" placeholder="السنة">
+                                    <input type="number" class="form-control text-center" id="inputYear" name="inputCardYear" placeholder="السنة" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputSecure" class="col-sm-2 pull-right control-label">رمز الحماية الثلاثي الموجود خلف البطاقة</label>
                                 <div class="col-sm-2 pull-right">
-                                    <input type="number" class="form-control" id="inputSecure" name="inputCardSecure">
+                                    <input type="number" class="form-control" id="inputSecure" name="inputCardSecure" required>
                                 </div>
                             </div>
                         </div>

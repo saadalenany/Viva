@@ -26,11 +26,23 @@ class HomeController extends Controller{
     }
 
     public function payment(Request $request){
-        $num = $request->input('p');
+        $id = $request->input('id');
 
-        $hot = Hotel::where('id', $num)->with('media')->get();
+        $hot = Hotel::where('id' ,$id)->with('media')->get()[0];
+        $jsonChecked = $request->input('room_checked');
 
-        return View::make('home.payment',compact("hot","num"));
+        $room_checked = [];
+
+        for ($i =0 ; $i< count($jsonChecked); $i++){
+            $room_checked[$i] = json_decode($jsonChecked[$i]);
+        }
+
+        $total = 0;
+        for ($i =0; $i < count($room_checked) ; $i++){
+            $total += $room_checked[$i]->price_per_night;
+        }
+
+        return View::make('home.payment',compact("hot","room_checked","total"));
     }
 
     public function room(Request $request){
@@ -51,7 +63,10 @@ class HomeController extends Controller{
 
     public function confirm(Request $request){
 
+        $total = $request->input('total');
         $id = $request->input('id');
+
+        $hot = Hotel::where('id' ,$id)->with('media')->get()[0];
 
         $inputName = $request->input('inputName');
         $inputMobile = $request->input('inputMobile');
@@ -84,9 +99,79 @@ class HomeController extends Controller{
                                              (int)$inputCardYear,
                                              $inputCardSecure);
 
-        $hot = Hotel::where('id', $id)->with('media')->get();
+        $customer_ip = $_SERVER['REMOTE_ADDR'];
 
-        return View::make('home.confirm',compact("hot","id","creditCardUser"));
+        $requestParams = array(
+            'access_code' => 'mGwuytxwMBE4lJCIlnl5' ,
+            'amount' => $total,
+            'command' => 'PURCHASE',
+            'currency' => 'EGP',
+            'customer_email' => 'mahmoud.h26@gmail.com',
+            'customer_ip'=>$customer_ip,
+            'language' => 'en',
+            'merchant_identifier' => 'dAQlHKed',
+            'merchant_reference' => Input::get('merchant_reference'), //'s2b3rj1vrjrhc1x',
+            'return_url'=>'http://localhost/viva/payment/payfort-response',
+//            'service_command'=>'TOKENIZATION',
+            'token_name'=> Input::get('token_name'), //'gftbbvfdt'
+            //'order_description' => 'Item',
+            //'signature' => 'a9b02b3ebb8355d4444695a4c3f6be83d11328c9a2001fa528ab7210dc443333',
+        );
+
+        $signText = 'TESTSHAIN';
+        foreach($requestParams as $k=>$val){
+            $signText.=$k.'='.$val;
+        }
+        $signText.='TESTSHAIN';
+        $signature = hash('sha256', $signText, false);
+        $requestParams['signature'] = $signature;
+        $redirectUrl = 'https://sbpaymentservices.payfort.com/FortAPI/paymentApi';
+
+        // Setup cURL
+        $ch = curl_init($redirectUrl);
+        curl_setopt_array($ch, array(
+            CURLOPT_POST => TRUE,
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: '.$authToken,
+                'Content-Type: application/json'
+            ),
+            CURLOPT_POSTFIELDS => json_encode($requestParams)
+        ));
+
+        // Send the request
+        $response = curl_exec($ch);
+
+        // Check for errors
+        if($response === FALSE){
+            die(curl_error($ch));
+        }
+
+        // Decode the response
+        $responseData = json_decode($response, TRUE);
+
+        // Print the date from the response
+//        print_r($responseData);
+
+        if(array_has($responseData, "3ds_url")){
+            return Redirect::to($responseData["3ds_url"]);
+        }
+
+        $resdata = response($responseData, 200)
+            ->header('Content-Type', 'application/json');
+
+        $jsonChecked = json_decode($request->input('room_checked'));
+
+        $room_checked = [];
+
+        for ($i =0 ; $i< count($jsonChecked); $i++){
+            $room_checked[$i] = $jsonChecked[$i];
+        }
+
+//        echo $response;
+//        die;
+        $tax = 50;
+        return View::make('home.confirm',compact("total","room_checked","hot","tax","creditCardUser","responseData"));
     }
 
     public function booking(Request $request){

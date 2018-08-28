@@ -31,7 +31,7 @@
                                 <div class="desc">
                                     <h5>إصدار فاتورة الى</h5>
                                     <h5 class="text-danger">{{$creditCardUser->inputName}}</h5>
-                                    <h6 class="text-default">{{$hot[0]->address}}</h6>
+                                    <h6 class="text-default">{{$hot->address}}</h6>
                                 </div>
                             </div>
                             <div class="col-md-7 col-sm-6 pull-right">
@@ -39,15 +39,15 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-4 pull-right">
                                             <h5>رقم الفاتورة</h5>
-                                            <span>4875</span>
+                                            <span>{{$responseData['response_code']}}</span>
                                         </div>
                                         <div class="col-md-4 col-sm-4 pull-right">
                                             <h5>تاريخ الفاتورة</h5>
-                                            <span>4/8/2017</span>
+                                            <span>{{date('Y-m-d')}}</span>
                                         </div>
                                         <div class="col-md-4 col-sm-4 pull-right">
                                             <h5>رقم الحساب</h5>
-                                            <span>456321158752</span>
+                                            <span>{{$creditCardUser->inputCardNumber}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -65,24 +65,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th class="text-right">{{$hot[0]->name}}</th>
-                                            <th class="text-center">1</th>
-                                            <th class="text-center">450 جنيه</th>
-                                            <th class="text-center">450 جنيه <hr></th>
-                                        </tr>
+                                        @for($i=0 ; $i<count($room_checked) ; $i++)
+                                            <tr>
+                                                <th class="text-right">{{$hot->name}} - {{$room_checked[$i]->name}}</th>
+                                                <th class="text-center">1</th>
+                                                <th class="text-center">{{$room_checked[$i]->price_per_night}} جنيه</th>
+                                                <th class="text-center">{{$room_checked[$i]->price_per_night}} جنيه<hr></th>
+                                            </tr>
+                                        @endfor
                                         <tr>
                                             <th class="text-right"></th>
                                             <th class="text-center"></th>
                                             <th class="text-center" colspan="2">
-                                                <p><label>السعر</label> : <span>450 جنيه</span></p>
-                                                <p><label>الضريبة</label> : <span>50 جنيه</span></p>
+                                                <p><label>السعر</label> : <span>{{$total}} جنيه</span></p>
+                                                <p><label>الضريبة</label> : <span>{{$tax}} جنيه</span></p>
                                             </th>
                                         </tr>
                                         <tr>
                                             <th class="text-right"></th>
                                             <th class="text-center bg-danger" colspan="3">
-                                                <p><label>الإجمالي</label> : <span>500 جنيه</span></p>
+                                                <p><label>الإجمالي</label> : <span>{{$total+$tax}} جنيه</span></p>
                                             </th>
                                         </tr>
                                         <tr>

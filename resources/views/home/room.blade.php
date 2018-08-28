@@ -21,7 +21,9 @@
 
         <!-- Search -->
         <div class="search">
-            <div class="container">
+            <form class="container" action="/payment" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="id" value="{{$hot[0]->id}}"/>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <img src="{{ asset('images/question_mark.png') }}" alt="fondoq">
@@ -95,13 +97,13 @@
                         <div class="rooms">
                             <h5 class="text-primary"><img src="{{ asset('images/room.png') }}">اختار نوع غرفتك</h5>
                             <div class="row">
-                                @foreach($room_amenities as $room)
+                                @for($i = 0 ; $i <count($room_amenities); $i++)
                                     <div class="col-sm-12">
-                                        <input type="checkbox" id="room-check[]">
-                                        <label for="room-check[]"><span>  </span><small>{{$room->name}}</small></label>
+                                        <input type="checkbox" name="room_checked[]" id="room-check{{$i}}" value="{{$room_amenities[$i]}}">
+                                        <label for="room-check{{$i}}" class="text-info"><span>  </span>{{$room_amenities[$i]->name}}</label>
                                         <ul class="list">
-                                            @foreach($room->room_amenities as $amn)
-                                                <li><span>{{$amn->name}}</span></li>
+                                            @foreach($room_amenities[$i]->room_amenities as $amn)
+                                                <li><span class="text-success">{{$amn->name}}</span></li>
                                             @endforeach
                                         </ul>
                                         {{--<h6 class="text-danger">رسوم الإلغاء</h6>--}}
@@ -110,9 +112,9 @@
                                             {{--<li><span>928 من تاريخ وما بعده 08/01/2017</span></li>--}}
                                             {{--<li><span>7٫424 من تاريخ وما بعده 10/01/2017</span></li>--}}
                                         {{--</ul>--}}
-                                        <h1 class="text-danger">{{$room->price_per_night}}</h1>
+                                        <h4 class="text-danger">{{$room_amenities[$i]->price_per_night}}</h4>
                                     </div>
-                                @endforeach
+                                @endfor
                             </div>
                         </div>
                     </div>
@@ -120,9 +122,9 @@
 
                 <!-- Submit Button -->
                 <div class="submit-btn text-left">
-                    <a href="/payment?p={{$hot[0]->id}}" class="btn btn-primary">متابعة</a>
+                    <input type="submit" value="متابعة" class="btn btn-primary">
                 </div>
-            </div>
+            </form>
         </div><!-- End Search -->
 
     </div><!-- END CONTENT -->
